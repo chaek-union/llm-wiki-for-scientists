@@ -18,8 +18,9 @@ ROOT = Path(__file__).resolve().parent.parent
 # 분량 예산. 실제 글자 수 기준이다. 셸의 `wc -m`은 로케일에 따라 바이트를
 # 세므로 한국어에서 세 배 가까이 부풀려진다. 기준은 파이썬의 len()이다.
 # 참고: autism 10,144자 / how-to-write-paper 13,929자.
+# 실물 근거를 넣은 뒤 장이 두꺼워져 상한을 22,000으로 올렸다.
 MIN_CHARS = 11_000
-MAX_CHARS = 18_000
+MAX_CHARS = 22_000
 
 # 본문에서 쓰지 않기로 한 표현. wiki/style.md가 정본이다.
 BANNED = [
