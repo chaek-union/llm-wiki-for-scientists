@@ -24,9 +24,10 @@
 
 * [12장. 학생과 연구자를 지도하는 법](part3/chapter12.md)
 * [13장. 공동연구에 LLM-Wiki 활용하기](part3/chapter13.md)
-* [14장. 그랜트의 생애주기를 관리하는 법](part3/chapter14.md)
-* [15장. AI 비서와 예약 자동화 운영하기](part3/chapter15.md)
-* [16장. 행정 서류를 안전하게 처리하는 법](part3/chapter16.md)
+* [14장. Notion MCP로 연구실 프로젝트 관리하기](part3/chapter14.md)
+* [15장. 그랜트의 생애주기를 관리하는 법](part3/chapter15.md)
+* [16장. AI 비서와 예약 자동화 운영하기](part3/chapter16.md)
+* [17장. 행정 서류를 안전하게 처리하는 법](part3/chapter17.md)
 
 ## 부록
 
