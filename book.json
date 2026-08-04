@@ -1,0 +1,5 @@
+{
+    "title": "LLM-Wiki: 지식이 축적되는 AI 작업 환경 만들기",
+    "root": ".",
+    "plugins": ["mermaid"]
+}

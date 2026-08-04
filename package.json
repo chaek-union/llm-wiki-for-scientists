@@ -1,0 +1,13 @@
+{
+  "name": "llm-wiki-for-scientists",
+  "version": "1.0.0",
+  "description": "LLM-Wiki: 사람이 방향을 정하고 AI가 함께 갱신하는 지식 작업 환경",
+  "dependencies": {
+    "honkit": "^6.1.4",
+    "honkit-plugin-mermaid": "^0.1.4"
+  },
+  "scripts": {
+    "build": "honkit build",
+    "serve": "honkit serve"
+  }
+}
