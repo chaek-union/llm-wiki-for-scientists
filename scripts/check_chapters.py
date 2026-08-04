@@ -33,6 +33,10 @@ BANNED = [
 # 지시 대용. 문장 첫머리에 올 때만 잡는다.
 VAGUE_REF = re.compile(r"(^|\n)\s*(이것은|이 사실은|그것은|이는 곧)\b")
 
+# 섹션 제목은 명사구다. 마지막 어절이 서술어나 종결어미면 문장이다.
+# 판정 기준은 Meetings/wiki/slides/output-gate.md와 같다.
+SENTENCE_TITLE = re.compile(r"(다|는가|은가|인가|을까|ㄹ까)$|[?？]")
+
 FRONTMATTER = re.compile(r"\A---\n(.*?)\n---\n", re.S)
 AUTHOR_MARKER = re.compile(r"<!--\s*AUTHOR:")
 BOLD = re.compile(r"\*\*[^*\n]+\*\*")
@@ -120,15 +124,27 @@ def check(path):
         problems.append("AUTHOR 마커가 없다")
 
     sections = re.findall(r"^# (.+)$", body, re.M)
-    if not any("해보기" in s for s in sections):
-        problems.append("필수 절 없음: 해보기")
-    # T1: 장마다 같은 기능의 결론 카드를 반복하지 않는다. 초고에 있던 두 절은
-    # 제거했고, 제목만 바꾼 같은 형식이 다시 들어오는 것도 막는다.
-    for banned in ("흔한 오해", "내 위키에 남기기", "정리", "확인할 점",
-                   "이 장을 삶으로", "마무리", "요약"):
+    # T1: 장마다 같은 기능의 절을 반복해 붙이지 않는다. 제목만 바꾼 같은
+    # 형식도 위반이므로 변형까지 함께 잡는다.
+    for banned in ("해보기", "흔한 오해", "내 위키에 남기기", "정리",
+                   "확인할 점", "이 장을 삶으로", "마무리", "요약",
+                   "실습", "따라 하기", "따라하기"):
         for s in sections:
             if s.strip() == banned or s.strip().endswith(banned):
                 problems.append(f"T1 위반 절: {s.strip()}")
+
+    for s in sections:
+        title = s.strip()
+        if title.endswith("장") or re.match(r"^\d+장[.． ]", title):
+            continue
+        if SENTENCE_TITLE.search(title) or ":" in title:
+            problems.append(f"문장형 절 제목: {title}")
+
+    # 독자가 따라 할 것은 장 끝에 모으지 않고 본문 중간의 코드 블록으로 둔다.
+    # 코드 블록이 하나도 없으면 따라 할 자리가 없다는 뜻이다.
+    blocks = re.findall(r"^```", body, re.M)
+    if len(blocks) < 4:
+        problems.append(f"코드 블록 {len(blocks) // 2}개 — 따라 할 자리가 부족하다")
 
     return {
         "chars": n,
