@@ -120,9 +120,15 @@ def check(path):
         problems.append("AUTHOR 마커가 없다")
 
     sections = re.findall(r"^# (.+)$", body, re.M)
-    for required in ("해보기", "흔한 오해", "내 위키에 남기기"):
-        if not any(required in s for s in sections):
-            problems.append(f"필수 절 없음: {required}")
+    if not any("해보기" in s for s in sections):
+        problems.append("필수 절 없음: 해보기")
+    # T1: 장마다 같은 기능의 결론 카드를 반복하지 않는다. 초고에 있던 두 절은
+    # 제거했고, 제목만 바꾼 같은 형식이 다시 들어오는 것도 막는다.
+    for banned in ("흔한 오해", "내 위키에 남기기", "정리", "확인할 점",
+                   "이 장을 삶으로", "마무리", "요약"):
+        for s in sections:
+            if s.strip() == banned or s.strip().endswith(banned):
+                problems.append(f"T1 위반 절: {s.strip()}")
 
     return {
         "chars": n,

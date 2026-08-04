@@ -85,6 +85,8 @@ images/                 도식과 그림
 
 모든 장은 `wiki/chapter-template.md`의 골격을 따른다. 절 제목은 `#`를 쓴다.
 
+규칙 T1에 따라 매 장 끝에 같은 기능의 결론 카드를 붙이지 않는다. 반복이 허용된 절은 `해보기` 하나뿐이다. 제목만 바꾸어 같은 형식을 남기는 것도 위반이고, `scripts/check_chapters.py`가 이것을 검사한다.
+
 ## 상태 모델
 
 각 장 파일은 frontmatter에 `status`를 가진다.
