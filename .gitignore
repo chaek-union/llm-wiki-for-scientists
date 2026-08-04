@@ -2,3 +2,10 @@ _book/
 node_modules/
 .DS_Store
 .claude/
+
+# 에이전트 지침. 공개 저장소에 올리지 않는다
+CLAUDE.md
+
+# 파이썬 캐시
+__pycache__/
+*.pyc
