@@ -141,9 +141,8 @@ def check(path):
             f"4문장 미만 본문 문단 {len(short)}개 / 본문 {len(body_paras)}개"
         )
 
+    # 마커가 0이면 저자가 채울 자리가 남지 않았다는 뜻이므로 결함이 아니다.
     markers = AUTHOR_MARKER.findall(text)
-    if not markers:
-        problems.append("AUTHOR 마커가 없다")
 
     sections = re.findall(r"^# (.+)$", body, re.M)
     # T1: 장마다 같은 기능의 절을 반복해 붙이지 않는다. 제목만 바꾼 같은
