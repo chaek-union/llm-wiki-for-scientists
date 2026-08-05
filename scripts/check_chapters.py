@@ -77,8 +77,8 @@ NON_PROSE_START = ("#", "|", "-", "*", ">", "!", "<!--", "1.", "2.", "3.", "```"
 def prose_paragraphs(body):
     """산문 문단만 돌려준다.
 
-    각 항목은 (문단, 뒤에 표·목록·코드가 붙는가)다. 표나 목록을 여는
-    도입 문단은 짧아도 되므로 문단 길이 검사에서 뺀다.
+    각 항목은 (문단, 표·목록·코드에 붙어 있는가)다. 표나 목록을 여는
+    도입 문단과 그 뒤에 붙는 주석 문단은 짧아도 되므로 길이 검사에서 뺀다.
     """
     # 코드 블록 안은 산문이 아니다. 블록 안에 빈 줄이 있으면 그 조각들이
     # 문단으로 세어져 문단 길이 검사가 헛돈다.
@@ -88,9 +88,10 @@ def prose_paragraphs(body):
     for i, block in enumerate(blocks):
         if block.startswith(NON_PROSE_START):
             continue
+        struct = ("|", "-", "*", "1.", "```", "!")
         nxt = blocks[i + 1] if i + 1 < len(blocks) else ""
-        leads_structure = nxt.startswith(("|", "-", "*", "1.", "```"))
-        out.append((block, leads_structure))
+        prv = blocks[i - 1] if i > 0 else ""
+        out.append((block, nxt.startswith(struct) or prv.startswith(struct)))
     return out
 
 
