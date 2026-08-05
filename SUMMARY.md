@@ -26,7 +26,7 @@
 * [16장. 방법을 배우고 연구를 설계하는 법](part2/chapter16.md)
 * [17장. 미팅과 공동연구를 준비하는 법](part2/chapter17.md)
 * [18장. 데이터에서 논문으로](part2/chapter18.md)
-* [19장. 새로 온 학생에게 건네는 온보딩 위키](part2/chapter19.md)
+* [19장. 새로운 주제 온보딩 하기](part2/chapter19.md)
 
 ## 파트 3. 연구책임자의 LLM-Wiki
 
