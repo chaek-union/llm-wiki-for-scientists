@@ -40,6 +40,13 @@ VAGUE_REF = re.compile(r"(^|\n)\s*(이것은|이 사실은|그것은|이는 곧)
 # 판정 기준은 Meetings/wiki/slides/output-gate.md와 같다.
 SENTENCE_TITLE = re.compile(r"(다|는가|은가|인가|을까|ㄹ까)$|[?？]")
 
+# R3. 장 첫머리의 범위 선언. "이 장은 ~를 다룬다" 류.
+SCOPE_ANNOUNCE = re.compile(
+    r"이 장[은는이의을를에서]{0,3}[^.]{0,45}"
+    r"(다룬다|다룰 것|맡는다|정리한다|가르[칠친]|보인다|따라간다|세운다"
+    r"|목표다|주제다|이야기다|할 일은|만드는 것은|마치면|다루는 것은)"
+)
+
 FRONTMATTER = re.compile(r"\A---\n(.*?)\n---\n", re.S)
 AUTHOR_MARKER = re.compile(r"<!--\s*AUTHOR:")
 BOLD = re.compile(r"\*\*[^*\n]+\*\*")
@@ -121,6 +128,14 @@ def check(path):
         problems.append(f"문장 첫머리 지시 대용 {len(vague)}곳")
 
     paras = prose_paragraphs(body)
+
+    # R3. 장의 첫 문단에서 그 장이 무엇을 할지 선언하지 않는다.
+    # 뒤의 장을 가리키는 문장은 정보를 주므로 첫 문단만 본다.
+    if paras:
+        opener_para = paras[0][0]
+        m = SCOPE_ANNOUNCE.search(opener_para)
+        if m:
+            problems.append(f"장 예고 문장: {m.group(0)[:34]}…")
 
     # K4. 장의 첫 문장을 짧은 부정으로 열지 않는다. 실질을 담은 긴
     # 부정문은 정상이므로 길이로 가른다.
