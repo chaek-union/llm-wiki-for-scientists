@@ -62,9 +62,9 @@ Markdown의 제목은 문서 안의 주소 역할을 한다. 문서에 제목 �
 
 Codex 안에서는 복잡한 판단과 대규모 교정에 Sol을 먼저 고른다. 일상적인 논문 ingest와 위키 페이지 작성은 Terra로도 충분히 좋은 품질이 나온다. 2026년 8월 2일에 같은 28쪽 논문을 두 모델로 처리해 비교했을 때 Sol과 Terra Extra High 모두 논문 신원, 사실, 문서 구조에서 중대한 오류 없이 통과했다. Terra는 근거 추적성, 방법의 구체성, 수치의 범위, 한계 처리에서 더 자세했고 Sol은 더 간결했다. 한 편을 대상으로 한 비교이므로 모든 작업의 우열을 판정한 시험은 아니지만 Terra를 일상적인 위키 생성에 써도 된다는 근거로는 충분했다.
 
-<img src="../assets/gemini-cli-fast-but-wrong-meme.png" alt="빠르게 답했지만 계산 결과는 틀린 장면을 빗댄 Gemini CLI 평가" width="404" style="max-width: 100%; height: auto;">
+<img src="../assets/gemini-cli-fast-but-wrong-meme-v2.png" alt="빠르게 답했지만 계산 결과는 틀린 장면을 빗댄 Gemini CLI 평가" width="560" style="max-width: 100%; height: auto;">
 
-*Gemini CLI를 써 본 인상은 이 장면과 닮았다. 에이전트 작업에서는 빠른 출력보다 지침 준수와 결과 검증이 중요하다.*
+*Gemini CLI를 써 본 인상은 이 장면과 닮았다. 에이전트 작업에서는 빠른 출력보다 지침 준수와 결과 검증이 중요하다. 출처: [링크](https://brunch.co.kr/@2a50c213d2ac47c/95)*
 
 새 도구를 검토할 때는 빈 폴더에 같은 지침과 같은 자료를 넣고 실제 결과를 비교한다. 파일을 올바른 곳에 남겼는지, 지침을 작업 끝까지 지켰는지, 요청하지 않은 변경을 만들지 않았는지를 보면 LLM-Wiki에 쓸 만한지 판단할 수 있다. 모델과 앱은 계속 바뀌므로 이 순위도 같은 시험을 다시 돌려 갱신한다.
 
