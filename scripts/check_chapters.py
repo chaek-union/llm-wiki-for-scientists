@@ -215,7 +215,7 @@ def check(path):
     # 독자가 따라 할 것은 장 끝에 모으지 않고 본문 중간의 코드 블록으로 둔다.
     # 코드 블록이 하나도 없으면 따라 할 자리가 없다는 뜻이다.
     blocks = re.findall(r"^```", body, re.M)
-    if len(blocks) < 2 and "![" not in body:
+    if len(blocks) < 2 and "![" not in body and not re.search(r"<img\b", body, re.I):
         problems.append("코드 블록도 그림도 없다 — 따라 할 자리가 없다")
 
     return {
