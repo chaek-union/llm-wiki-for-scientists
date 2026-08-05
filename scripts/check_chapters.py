@@ -82,7 +82,7 @@ def prose_paragraphs(body):
     """
     # 코드 블록 안은 산문이 아니다. 블록 안에 빈 줄이 있으면 그 조각들이
     # 문단으로 세어져 문단 길이 검사가 헛돈다.
-    body = re.sub(r"^```.*?^```", "", body, flags=re.S | re.M)
+    body = re.sub(r"^```.*?^```", "```", body, flags=re.S | re.M)
     blocks = [b.strip() for b in body.split("\n\n") if b.strip()]
     out = []
     for i, block in enumerate(blocks):
@@ -171,7 +171,7 @@ def check(path):
 
     # R4. 장의 마지막 문단은 코다가 앉는 자리다. 예전에는 이 문단을 길이
     # 검사에서 통째로 뺐고, 그 예외가 경구형 마무리를 그대로 통과시켰다.
-    if paras and not front_matter_exempt:
+    if paras and not front_matter_exempt and not paras[-1][1]:
         last = paras[-1][0]
         if count_sentences(last) < 6:
             problems.append(f"장 마무리 코다 의심: {last[:34]}…")

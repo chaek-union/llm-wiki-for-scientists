@@ -37,7 +37,7 @@ score(D, Q) = Σ IDF(q) · ( f(q,D) · (k1 + 1) ) / ( f(q,D) + k1 · (1 - b + b 
 | 계층 색인 재구축 | `scripts/build_hierarchical_index.py --all --apply` |
 | 종합 층 연결 감사 | `scripts/audit_synthesis_coverage.py` |
 
-마지막 항목은 검색이 아니라 검증을 담당한다. 종합 문서와 연결되지 않은 고아 페이지를 범주별로 세어 주므로, 본문 4장에서 다룬 ingest 완료 조건이 실제로 지켜지는지 확인할 수 있다.
+마지막 항목은 검증을 담당한다. 종합 문서와 연결되지 않은 고아 페이지를 범주별로 세어 주므로, 본문 4장에서 다룬 ingest 완료 조건이 실제로 지켜지는지 확인할 수 있다.
 
 ## 검색이 하지 않는 일
 
