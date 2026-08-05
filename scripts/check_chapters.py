@@ -15,15 +15,10 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
 
-# 분량 예산. 실제 글자 수 기준이다. 셸의 `wc -m`은 로케일에 따라 바이트를
-# 세므로 한국어에서 세 배 가까이 부풀려진다. 기준은 파이썬의 len()이다.
-# 참고: autism 10,144자 / how-to-write-paper 13,929자.
-# 실물 근거를 넣은 뒤 장이 두꺼워져 상한을 22,000으로 올렸다.
-# 하한은 초고가 아예 없는 장을 잡기 위한 것이지 분량을 채우게 하려는 것이
-# 아니다. R1이 지운 자리를 새 문장으로 메우지 말라고 하므로, 개념을 다루는
-# 1장이 8,300자에서 끝난 것을 위반으로 보지 않고 하한을 8,000으로 둔다.
-MIN_CHARS = 8_000
-MAX_CHARS = 22_000
+# 분량은 게이트로 두지 않는다. 저자가 두 번 밝힌 방침이고, 장마다
+# 다루는 것의 양이 다르므로 자릿수로 판정할 대상이 아니다. 상태 줄에
+# 글자 수만 표시한다. 셸의 `wc -m`은 로케일에 따라 바이트를 세므로
+# 한국어에서 세 배 가까이 부풀려진다. 기준은 파이썬의 len()이다.
 
 # 본문에서 쓰지 않기로 한 표현. wiki/style.md가 정본이다.
 BANNED = [
@@ -123,12 +118,6 @@ def check(path):
                 problems.append(f"frontmatter에 {key}가 없다")
 
     n = len(text)
-    if front_matter_exempt:
-        pass
-    elif n < MIN_CHARS:
-        problems.append(f"분량 부족: {n:,}자 (하한 {MIN_CHARS:,})")
-    elif n > MAX_CHARS:
-        problems.append(f"분량 초과: {n:,}자 (상한 {MAX_CHARS:,})")
 
     bolds = [] if front_matter_exempt else BOLD.findall(body)
     if bolds:
