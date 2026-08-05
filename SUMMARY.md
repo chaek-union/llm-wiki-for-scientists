@@ -19,20 +19,21 @@
 
 ## 파트 2. 연구를 시작하는 학생의 LLM-Wiki
 
-* [12장. 논문이란 무엇인가](part2/chapter12.md)
-* [13장. 방법을 배우고 연구를 설계하는 법](part2/chapter13.md)
-* [14장. 미팅과 공동연구를 준비하는 법](part2/chapter14.md)
-* [15장. 데이터에서 논문으로](part2/chapter15.md)
+* [12장. 새로 온 학생에게 건네는 온보딩 위키](part2/chapter12.md)
+* [13장. 논문이란 무엇인가](part2/chapter13.md)
+* [14장. 방법을 배우고 연구를 설계하는 법](part2/chapter14.md)
+* [15장. 미팅과 공동연구를 준비하는 법](part2/chapter15.md)
+* [16장. 데이터에서 논문으로](part2/chapter16.md)
 
 ## 파트 3. 연구책임자의 LLM-Wiki
 
-* [16장. 연구책임자를 위한 MCP 연결](part3/chapter16.md)
-* [17장. 도반, 당신의 공동연구자를 지도하는 법](part3/chapter17.md)
-* [18장. 공동연구에 LLM-Wiki 활용하기](part3/chapter18.md)
-* [19장. Notion MCP로 연구실 프로젝트 관리하기](part3/chapter19.md)
-* [20장. 그랜트의 생애주기를 관리하는 법](part3/chapter20.md)
-* [21장. AI 비서와 예약 자동화 운영하기](part3/chapter21.md)
-* [22장. 행정 서류를 안전하게 처리하는 법](part3/chapter22.md)
+* [17장. 연구책임자를 위한 MCP 연결](part3/chapter17.md)
+* [18장. 도반, 당신의 공동연구자를 지도하는 법](part3/chapter18.md)
+* [19장. 공동연구에 LLM-Wiki 활용하기](part3/chapter19.md)
+* [20장. Notion MCP로 연구실 프로젝트 관리하기](part3/chapter20.md)
+* [21장. 그랜트의 생애주기를 관리하는 법](part3/chapter21.md)
+* [22장. AI 비서와 예약 자동화 운영하기](part3/chapter22.md)
+* [23장. 행정 서류를 안전하게 처리하는 법](part3/chapter23.md)
 
 ## 부록
 
