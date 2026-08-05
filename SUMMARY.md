@@ -19,11 +19,11 @@
 
 ## 파트 2. 연구를 시작하는 학생의 LLM-Wiki
 
-* [12장. 새로 온 학생에게 건네는 온보딩 위키](part2/chapter12.md)
-* [13장. 논문이란 무엇인가](part2/chapter13.md)
-* [14장. 방법을 배우고 연구를 설계하는 법](part2/chapter14.md)
-* [15장. 미팅과 공동연구를 준비하는 법](part2/chapter15.md)
-* [16장. 데이터에서 논문으로](part2/chapter16.md)
+* [12장. 논문이란 무엇인가](part2/chapter12.md)
+* [13장. 방법을 배우고 연구를 설계하는 법](part2/chapter13.md)
+* [14장. 미팅과 공동연구를 준비하는 법](part2/chapter14.md)
+* [15장. 데이터에서 논문으로](part2/chapter15.md)
+* [16장. 새로 온 학생에게 건네는 온보딩 위키](part2/chapter16.md)
 
 ## 파트 3. 연구책임자의 LLM-Wiki
 
