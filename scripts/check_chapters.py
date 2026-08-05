@@ -58,17 +58,8 @@ SCOPE_ANNOUNCE = re.compile(
     r"|목표다|주제다|이야기다|할 일은|만드는 것은|마치면|다루는 것은)"
 )
 
-FRONTMATTER = re.compile(r"\A---\n(.*?)\n---\n", re.S)
 AUTHOR_MARKER = re.compile(r"<!--\s*AUTHOR:")
 BOLD = re.compile(r"\*\*[^*\n]+\*\*")
-
-
-def split_body(text):
-    """frontmatter를 떼고 본문만 돌려준다."""
-    m = FRONTMATTER.match(text)
-    if not m:
-        return None, text
-    return m.group(1), text[m.end():]
 
 
 NON_PROSE_START = ("#", "|", "-", "*", ">", "!", "<!--", "1.", "2.", "3.", "```")
@@ -107,20 +98,13 @@ def count_sentences(paragraph):
 
 def check(path):
     text = path.read_text(encoding="utf-8")
-    fm, body = split_body(text)
+    body = text
     problems = []
-    front_matter_exempt = path.name in ("README.md", "getting-started.md")
-
-    if fm is None and not front_matter_exempt:
-        problems.append("frontmatter가 없다")
-    elif fm is not None:
-        for key in ("status", "part", "budget"):
-            if f"{key}:" not in fm:
-                problems.append(f"frontmatter에 {key}가 없다")
+    intro_file = path.name in ("README.md", "getting-started.md")
 
     n = len(text)
 
-    bolds = [] if front_matter_exempt else BOLD.findall(body)
+    bolds = [] if intro_file else BOLD.findall(body)
     if bolds:
         problems.append(f"굵은 글씨 {len(bolds)}곳: {bolds[0][:30]}")
 
@@ -129,7 +113,7 @@ def check(path):
         ln for ln in body.split("\n") if not ln.startswith("#")
     )
     banned = BANNED + CLICHE
-    if front_matter_exempt:
+    if intro_file:
         banned = [w for w in banned if w not in ("당신의", "당신은", "여러분")]
     for word in banned:
         if word in prose_only:
@@ -171,7 +155,7 @@ def check(path):
 
     # R4. 장의 마지막 문단은 코다가 앉는 자리다. 예전에는 이 문단을 길이
     # 검사에서 통째로 뺐고, 그 예외가 경구형 마무리를 그대로 통과시켰다.
-    if paras and not front_matter_exempt and not paras[-1][1]:
+    if paras and not intro_file and not paras[-1][1]:
         last = paras[-1][0]
         if count_sentences(last) < 6:
             problems.append(f"장 마무리 코다 의심: {last[:34]}…")
@@ -191,7 +175,7 @@ def check(path):
     # 마커가 0이면 저자가 채울 자리가 남지 않았다는 뜻이므로 결함이 아니다.
     markers = AUTHOR_MARKER.findall(text)
 
-    if front_matter_exempt:
+    if intro_file:
         return {"chars": n, "sections": 0, "paragraphs": len(paras),
                 "markers": len(markers), "problems": problems}
 
@@ -235,8 +219,7 @@ def main():
             ROOT.glob("part*/chapter*.md"),
             key=lambda p: int(re.search(r"(\d+)", p.stem).group(1)),
         )
-        # 서문과 들어가며도 같은 문체 규칙을 받는다. frontmatter와 분량
-        # 규정은 없으므로 그 두 항목은 검사에서 뺀다.
+        # 서문과 들어가며도 같은 문체 규칙을 받는다.
         targets = [ROOT / "README.md", ROOT / "getting-started.md"] + targets
 
     failed = 0
