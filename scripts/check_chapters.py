@@ -113,21 +113,24 @@ def check(path):
     text = path.read_text(encoding="utf-8")
     fm, body = split_body(text)
     problems = []
+    front_matter_exempt = path.name in ("README.md", "getting-started.md")
 
-    if fm is None:
+    if fm is None and not front_matter_exempt:
         problems.append("frontmatter가 없다")
-    else:
+    elif fm is not None:
         for key in ("status", "part", "budget"):
             if f"{key}:" not in fm:
                 problems.append(f"frontmatter에 {key}가 없다")
 
     n = len(text)
-    if n < MIN_CHARS:
+    if front_matter_exempt:
+        pass
+    elif n < MIN_CHARS:
         problems.append(f"분량 부족: {n:,}자 (하한 {MIN_CHARS:,})")
     elif n > MAX_CHARS:
         problems.append(f"분량 초과: {n:,}자 (상한 {MAX_CHARS:,})")
 
-    bolds = BOLD.findall(body)
+    bolds = [] if front_matter_exempt else BOLD.findall(body)
     if bolds:
         problems.append(f"굵은 글씨 {len(bolds)}곳: {bolds[0][:30]}")
 
@@ -135,7 +138,10 @@ def check(path):
     prose_only = "\n".join(
         ln for ln in body.split("\n") if not ln.startswith("#")
     )
-    for word in BANNED + CLICHE:
+    banned = BANNED + CLICHE
+    if front_matter_exempt:
+        banned = [w for w in banned if w not in ("당신의", "당신은", "여러분")]
+    for word in banned:
         if word in prose_only:
             problems.append(f"금지 표현: {word}")
 
@@ -172,7 +178,7 @@ def check(path):
 
     # R4. 장의 마지막 문단은 코다가 앉는 자리다. 예전에는 이 문단을 길이
     # 검사에서 통째로 뺐고, 그 예외가 경구형 마무리를 그대로 통과시켰다.
-    if paras:
+    if paras and not front_matter_exempt:
         last = paras[-1][0]
         if count_sentences(last) < 6:
             problems.append(f"장 마무리 코다 의심: {last[:34]}…")
@@ -191,6 +197,10 @@ def check(path):
 
     # 마커가 0이면 저자가 채울 자리가 남지 않았다는 뜻이므로 결함이 아니다.
     markers = AUTHOR_MARKER.findall(text)
+
+    if front_matter_exempt:
+        return {"chars": n, "sections": 0, "paragraphs": len(paras),
+                "markers": len(markers), "problems": problems}
 
     sections = re.findall(r"^# (.+)$", body, re.M)
     # T1: 장마다 같은 기능의 절을 반복해 붙이지 않는다. 제목만 바꾼 같은
@@ -232,6 +242,9 @@ def main():
             ROOT.glob("part*/chapter*.md"),
             key=lambda p: int(re.search(r"(\d+)", p.stem).group(1)),
         )
+        # 서문과 들어가며도 같은 문체 규칙을 받는다. frontmatter와 분량
+        # 규정은 없으므로 그 두 항목은 검사에서 뺀다.
+        targets = [ROOT / "README.md", ROOT / "getting-started.md"] + targets
 
     failed = 0
     total_chars = 0
