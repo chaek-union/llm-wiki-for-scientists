@@ -122,6 +122,13 @@ def check(path):
 
     paras = prose_paragraphs(body)
 
+    # K4. 장의 첫 문장을 짧은 부정으로 열지 않는다. 실질을 담은 긴
+    # 부정문은 정상이므로 길이로 가른다.
+    if paras:
+        opener = re.split(r"(?<=[.!?])\s+", paras[0][0].strip())[0]
+        if re.search(r"(않는다|않다|아니다|없다|못한다)\.?$", opener) and len(opener) < 30:
+            problems.append(f"부정으로 여는 첫 문장: {opener}")
+
     # R4. 장의 마지막 문단은 코다가 앉는 자리다. 예전에는 이 문단을 길이
     # 검사에서 통째로 뺐고, 그 예외가 경구형 마무리를 그대로 통과시켰다.
     if paras:
