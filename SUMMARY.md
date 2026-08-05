@@ -30,7 +30,7 @@
 
 ## 파트 3. 연구책임자의 LLM-Wiki
 
-* [20장. 연구책임자를 위한 MCP 연결](part3/chapter20.md)
+* [20장. MCP 기본 개념](part3/chapter20.md)
 * [21장. 도반, 당신의 공동연구자를 지도하는 법](part3/chapter21.md)
 * [22장. 공동연구에 LLM-Wiki 활용하기](part3/chapter22.md)
 * [23장. Notion MCP로 연구실 프로젝트 관리하기](part3/chapter23.md)
