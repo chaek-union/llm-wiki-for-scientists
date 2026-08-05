@@ -40,6 +40,22 @@ VAGUE_REF = re.compile(r"(^|\n)\s*(이것은|이 사실은|그것은|이는 곧)
 # 판정 기준은 Meetings/wiki/slides/output-gate.md와 같다.
 SENTENCE_TITLE = re.compile(r"(다|는가|은가|인가|을까|ㄹ까)$|[?？]")
 
+# 빈 추상명사 착지. 문단의 마지막 문장이 여기로 끝나면 리본을 묶은 것이다.
+EMPTY_LANDING = re.compile(r"(관점|방식|논리|문제|렌즈|공간|이야기|지점|차원)(이었다|였다|이다|다)\.\s*$")
+
+# 두 문장으로 늘린 A가 아니라 B.
+NEGATE_THEN_ASSERT = re.compile(
+    r"[^.\n]{5,70}(필요는 없다|필요가 없다|필요하지 않다|하지 않아도 된다)\.\s+"
+    r"[^.\n]{5,60}(면 된다|면 충분하다|하면 된다)\."
+)
+
+# 상투구
+CLICHE = [
+    "구조적 접근", "실질적 성과", "업무 맥락", "업무 흐름", "체계적 접근",
+    "아무도 알려주지 않", "미래는 이미", "모두가 놓치는", "진짜 중요한 건",
+    "무너지는 이유",
+]
+
 # R3. 장 첫머리의 범위 선언. "이 장은 ~를 다룬다" 류.
 SCOPE_ANNOUNCE = re.compile(
     r"이 장[은는이의을를에서]{0,3}[^.]{0,45}"
@@ -119,9 +135,19 @@ def check(path):
     prose_only = "\n".join(
         ln for ln in body.split("\n") if not ln.startswith("#")
     )
-    for word in BANNED:
+    for word in BANNED + CLICHE:
         if word in prose_only:
             problems.append(f"금지 표현: {word}")
+
+    if NEGATE_THEN_ASSERT.search(prose_only):
+        problems.append("부정으로 열고 다음 문장에서 긍정하는 전개")
+
+    for blk in [b.strip() for b in body.split("\n\n")]:
+        if not blk or blk.startswith(NON_PROSE_START):
+            continue
+        last = re.split(r"(?<=[.!?])\s+", blk)[-1]
+        if EMPTY_LANDING.search(last):
+            problems.append(f"빈 추상명사 착지: {last[-28:]}")
 
     vague = VAGUE_REF.findall(body)
     if vague:
