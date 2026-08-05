@@ -34,7 +34,7 @@
 
 * [22장. MCP 기본 개념](part3/chapter22.md)
 * [23장. 도반, 당신의 공동연구자를 지도하는 법](part3/chapter23.md)
-* [24장. 공동연구에 LLM-Wiki 활용하기](part3/chapter24.md)
+* [24장. Meetings 폴더로 PI의 외부 활동 관리하기](part3/chapter24.md)
 * [25장. Notion MCP로 연구실 프로젝트 관리하기](part3/chapter25.md)
 * [26장. LLM-Wiki와 에이전트를 이용하여 연구과제 관리하기](part3/chapter26.md)
 * [27장. AI 비서와 예약 자동화 만들기](part3/chapter27.md)
