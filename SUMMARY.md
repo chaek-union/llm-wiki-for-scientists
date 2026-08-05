@@ -17,12 +17,12 @@
 
 * [8장. 논문이란 무엇인가](part2/chapter8.md)
 * [9장. 방법을 배우고 연구를 설계하는 법](part2/chapter9.md)
-* [10장. 미팅과 공동연구를 설계하는 법](part2/chapter10.md)
+* [10장. 미팅과 공동연구를 준비하는 법](part2/chapter10.md)
 * [11장. 데이터에서 논문으로](part2/chapter11.md)
 
 ## 파트 3. 연구책임자의 LLM-Wiki
 
-* [12장. 학생과 연구자를 지도하는 법](part3/chapter12.md)
+* [12장. 도반, 당신의 공동연구자를 지도하는 법](part3/chapter12.md)
 * [13장. 공동연구에 LLM-Wiki 활용하기](part3/chapter13.md)
 * [14장. Notion MCP로 연구실 프로젝트 관리하기](part3/chapter14.md)
 * [15장. 그랜트의 생애주기를 관리하는 법](part3/chapter15.md)

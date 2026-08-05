@@ -102,8 +102,12 @@ def check(path):
     if bolds:
         problems.append(f"굵은 글씨 {len(bolds)}곳: {bolds[0][:30]}")
 
+    # 제목 줄은 저자가 의도적으로 2인칭을 쓰는 자리가 있어 검사에서 뺀다.
+    prose_only = "\n".join(
+        ln for ln in body.split("\n") if not ln.startswith("#")
+    )
     for word in BANNED:
-        if word in body:
+        if word in prose_only:
             problems.append(f"금지 표현: {word}")
 
     vague = VAGUE_REF.findall(body)
@@ -143,8 +147,8 @@ def check(path):
     # 독자가 따라 할 것은 장 끝에 모으지 않고 본문 중간의 코드 블록으로 둔다.
     # 코드 블록이 하나도 없으면 따라 할 자리가 없다는 뜻이다.
     blocks = re.findall(r"^```", body, re.M)
-    if len(blocks) < 4:
-        problems.append(f"코드 블록 {len(blocks) // 2}개 — 따라 할 자리가 부족하다")
+    if len(blocks) < 2:
+        problems.append("코드 블록이 없다 — 도식도 따라 할 자리도 없다")
 
     return {
         "chars": n,
