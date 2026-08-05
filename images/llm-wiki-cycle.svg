@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 670 250" width="670" height="250" role="img" aria-label="질문에서 자료 수집, 읽기와 정리, 기존 지식과 연결, 종합 문서 갱신, 판단과 실행을 거쳐 다음 질문으로 돌아오는 순환">
+  <defs>
+    <marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 1 L 9 5 L 0 9 z" fill="#4a5568"/>
+    </marker>
+    <style>
+      .box  { fill: #f4f6f8; stroke: #4a5568; stroke-width: 1.5; }
+      .lbl  { font-family: 'Apple SD Gothic Neo','Noto Sans KR','Malgun Gothic',sans-serif;
+              font-size: 15px; fill: #1a202c; text-anchor: middle; }
+      .edge { stroke: #4a5568; stroke-width: 1.5; fill: none; marker-end: url(#ar); }
+      .note { font-family: 'Apple SD Gothic Neo','Noto Sans KR','Malgun Gothic',sans-serif;
+              font-size: 13px; fill: #4a5568; }
+    </style>
+  </defs>
+
+  <rect class="box" x="30"  y="30"  width="170" height="54" rx="8"/>
+  <rect class="box" x="250" y="30"  width="170" height="54" rx="8"/>
+  <rect class="box" x="470" y="30"  width="170" height="54" rx="8"/>
+  <rect class="box" x="30"  y="160" width="170" height="54" rx="8"/>
+  <rect class="box" x="250" y="160" width="170" height="54" rx="8"/>
+  <rect class="box" x="470" y="160" width="170" height="54" rx="8"/>
+
+  <text class="lbl" x="115" y="62">질문</text>
+  <text class="lbl" x="335" y="62">자료 수집</text>
+  <text class="lbl" x="555" y="62">읽기와 정리</text>
+  <text class="lbl" x="555" y="192">기존 지식과 연결</text>
+  <text class="lbl" x="335" y="192">종합 문서 갱신</text>
+  <text class="lbl" x="115" y="192">판단과 실행</text>
+
+  <path class="edge" d="M 200 57 L 244 57"/>
+  <path class="edge" d="M 420 57 L 464 57"/>
+  <path class="edge" d="M 555 84 L 555 154"/>
+  <path class="edge" d="M 470 187 L 426 187"/>
+  <path class="edge" d="M 250 187 L 206 187"/>
+  <path class="edge" d="M 115 160 L 115 90"/>
+
+  <text class="note" x="130" y="130">다음 질문</text>
+</svg>

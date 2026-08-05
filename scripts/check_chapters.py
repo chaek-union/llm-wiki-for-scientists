@@ -115,6 +115,18 @@ def check(path):
         problems.append(f"문장 첫머리 지시 대용 {len(vague)}곳")
 
     paras = prose_paragraphs(body)
+
+    # R4. 장의 마지막 문단은 코다가 앉는 자리다. 예전에는 이 문단을 길이
+    # 검사에서 통째로 뺐고, 그 예외가 경구형 마무리를 그대로 통과시켰다.
+    if paras:
+        last = paras[-1][0]
+        if count_sentences(last) < 6:
+            problems.append(f"장 마무리 코다 의심: {last[:34]}…")
+        tail = re.split(r"(?<=[.!?])\s+", last.strip())[-1]
+        for seal in ("이 책을 덮고", "이 책의 처음이자", "말의 실제 내용이다",
+                     "남길 것은", "만드는 것은", "것뿐이다"):
+            if seal in tail:
+                problems.append(f"장 마무리 봉합문: {seal}")
     # 표·목록·코드를 여는 도입 문단과 장을 여닫는 문단은 짧아도 된다.
     body_paras = [p for p, leads in paras[1:-1] if not leads]
     short = [p for p in body_paras if count_sentences(p) < 4]
@@ -147,8 +159,8 @@ def check(path):
     # 독자가 따라 할 것은 장 끝에 모으지 않고 본문 중간의 코드 블록으로 둔다.
     # 코드 블록이 하나도 없으면 따라 할 자리가 없다는 뜻이다.
     blocks = re.findall(r"^```", body, re.M)
-    if len(blocks) < 2:
-        problems.append("코드 블록이 없다 — 도식도 따라 할 자리도 없다")
+    if len(blocks) < 2 and "![" not in body:
+        problems.append("코드 블록도 그림도 없다 — 따라 할 자리가 없다")
 
     return {
         "chars": n,
