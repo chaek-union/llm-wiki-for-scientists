@@ -7,8 +7,8 @@
 
 * [1장. LLM-Wiki란 무엇인가](part1/chapter1.md)
 * [2장. AI 에이전트와 작업 폴더](part1/chapter2.md)
-* [3장. 에이전트에게 주는 권한의 경계](part1/chapter3.md)
-* [4장. Karpathy의 제안에서 나의 연구 위키까지](part1/chapter4.md)
+* [3장. Karpathy의 제안에서 나의 연구 위키까지](part1/chapter3.md)
+* [4장. 에이전트에게 주는 권한의 경계](part1/chapter4.md)
 * [5장. 말로 지시하고 맥락을 넘기는 법](part1/chapter5.md)
 * [6장. 논문 한 편을 LLM-Wiki에 넣는 법](part1/chapter6.md)
 * [7장. 논문 PDF를 ingest 하는 방법](part1/chapter7.md)
