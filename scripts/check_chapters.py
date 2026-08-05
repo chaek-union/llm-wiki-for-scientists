@@ -141,6 +141,9 @@ def check(path):
     for blk in [b.strip() for b in body.split("\n\n")]:
         if not blk or blk.startswith(NON_PROSE_START):
             continue
+        n_jari = len(re.findall(r"자리", blk))
+        if n_jari > 3:
+            problems.append(f"「자리」 {n_jari}회: {blk[:26]}…")
         last = re.split(r"(?<=[.!?])\s+", blk)[-1]
         if EMPTY_LANDING.search(last):
             problems.append(f"빈 추상명사 착지: {last[-28:]}")
