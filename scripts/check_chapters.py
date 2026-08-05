@@ -71,7 +71,7 @@ def split_body(text):
     return m.group(1), text[m.end():]
 
 
-NON_PROSE_START = ("#", "|", "-", "*", ">", "<!--", "1.", "2.", "3.", "```")
+NON_PROSE_START = ("#", "|", "-", "*", ">", "!", "<!--", "1.", "2.", "3.", "```")
 
 
 def prose_paragraphs(body):
