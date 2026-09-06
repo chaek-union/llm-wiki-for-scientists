@@ -8,6 +8,7 @@ node_modules/
 # 들어 있고, 집필 로그와 설계안에도 내부 판단이 그대로 남아 있다.
 # 원고는 이 문서들을 일반화해서 쓰지만 원본은 그렇지 않다.
 CLAUDE.md
+AGENTS.md
 wiki/
 docs/
 
